@@ -1,0 +1,89 @@
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.logout-button {
+    background: #dc3545;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.logout-button:hover {
+    background: #c82333;
+    transform: scale(1.05);
+}
+
+.logout-button:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Additional Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+}
+
+/* App layout grid */
+.app-container {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 20px;
+    max-width: 1400px;
+   
+    margin: 0 auto;
+}
+
+/* Right side container for search and todos */
+.todos-section {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Adjust todos container to display in a grid of 3 */
+.todos-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+/* Make sure todo cards take up proper space */
+.todo-card {
+    width: 100%;
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .todos-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .app-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .todos-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .todos-container {
+        grid-template-columns: 1fr;
+    }
+}
