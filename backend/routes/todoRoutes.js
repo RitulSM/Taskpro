@@ -9,7 +9,7 @@ const router = express.Router();
 router.post("/", auth, async (req, res) => {
     const parsedPayload = createtodo.safeParse(req.body);
     if (!parsedPayload.success) return res.status(411).json({ msg: "Wrong inputs" });
-
+    
     const todoData = {
         ...req.body,
         completed: false,

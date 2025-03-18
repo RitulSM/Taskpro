@@ -1,14 +1,20 @@
-import { useState } from "react"
-import "./LandingPage.css"
+import { useState, useEffect } from "react";
+import "./LandingPage.css";
 
-function LandingPage({ onLogin }) {
-  const [isLogin, setIsLogin] = useState(true)
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
+function LandingPage({ onLogin, darkMode, toggleDarkMode }) {
+  const [isLogin, setIsLogin] = useState(true);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  // Apply dark or light mode to body
+  useEffect(() => {
+    document.body.classList.toggle("dark-mode", darkMode);
+    document.body.classList.toggle("light-mode", !darkMode);
+  }, [darkMode]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       const response = await fetch(`http://localhost:5000/auth/${isLogin ? "login" : "signup"}`, {
         method: "POST",
@@ -16,23 +22,32 @@ function LandingPage({ onLogin }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ username, password }),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem("token", data.token)
-        onLogin(data.token)
+        localStorage.setItem("token", data.token);
+        onLogin(data.token);
       } else {
-        setError(data.msg)
+        setError(data.msg);
       }
     } catch (error) {
-      setError("An error occurred")
+      setError("An error occurred");
     }
-  }
+  };
 
   return (
-    <div className="landing-page">
+    <div className={`landing-page ${darkMode ? "dark-mode" : "light-mode"}`}>
+      <div className="theme-toggle-container">
+        <button
+          onClick={toggleDarkMode}
+          className="theme-toggle-button"
+          aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+        >
+          {darkMode ? "☀️" : "🌙"}
+        </button>
+      </div>
       <div className="content-wrapper">
         <div className="info-section">
           <h1>Welcome to TaskMaster Pro</h1>
@@ -75,8 +90,7 @@ function LandingPage({ onLogin }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default LandingPage
-
+export default LandingPage;

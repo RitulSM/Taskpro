@@ -10,7 +10,23 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [searchTerm, setSearchTerm] = useState('');
-
+  const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
+  
+  useEffect(() => {
+    // Apply dark mode class to body
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+    // Save preference to localStorage
+    localStorage.setItem('darkMode', darkMode);
+  }, [darkMode]);
+  
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+  
   const fetchTodos = async () => {
     try {
       const res = await fetch("http://localhost:5000/todos", {
@@ -25,45 +41,54 @@ function App() {
       console.error("Error fetching todos:", error);
     }
   };
-
+  
   useEffect(() => {
     if (token) {
       fetchTodos();
     }
   }, [token]);
-
+  
   const handleLogout = () => {
     localStorage.removeItem('token');
     setToken(null);
     toast.info("Logged out successfully", { autoClose: 2000 });
   };
-
+  
   const filteredTodos = todos.filter(todo =>
     todo.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     todo.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
+  
   if (!token) {
-    return <LandingPage onLogin={setToken} />;
+    return <LandingPage onLogin={setToken} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />;
   }
-
+  
   return (
-    <div>
-      <nav className="bg-gray-800 p-4 mb-4">
+    <div className={darkMode ? 'dark-mode' : 'light-mode'}>
+      <nav className={`p-4 mb-4 ${darkMode ? 'bg-gray-900' : 'bg-gray-800'}`}>
         <div className="navbar-container">
           <h1 className="text-white text-2xl font-bold">Tasks App</h1>
-          <button
-            onClick={handleLogout}
-            className="logout-button"
-          >
-            Logout
-          </button>
+          <div className="flex items-center">
+            <button
+              onClick={toggleDarkMode}
+              className="app-theme-toggle-button"
+              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {darkMode ? '☀️' : '🌙'}
+            </button>
+            <button
+              onClick={handleLogout}
+              className="logout-button"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </nav>
       
       <div className="app-container">
         <div className="create-todo-section">
-          <CreateTodo onTodoAdded={fetchTodos} token={token} />
+          <CreateTodo onTodoAdded={fetchTodos} token={token} darkMode={darkMode} />
         </div>
         
         <div className="todos-section">
@@ -73,18 +98,13 @@ function App() {
               placeholder="Search todos by title or description..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="search-input"
-              style={{
-                width: '100%',
-                fontSize: '16px',
-                border: '1px solid #ccc',
-                borderRadius: '4px',
-                padding: '12px'
-              }}
+              className="app-search-input"
             />
           </div>
           
-          <Todos todos={filteredTodos} fetchTodos={fetchTodos} token={token} />
+          <div className="app-todos-container">
+            <Todos todos={filteredTodos} fetchTodos={fetchTodos} token={token} />
+          </div>
         </div>
       </div>
       <ToastContainer autoClose={2000} />

@@ -6,8 +6,13 @@
     margin-bottom: 40px;
 }
 
+.nav-buttons {
+    display: flex;
+    align-items: center;
+}
+
 .logout-button {
-    background: #dc3545;
+    background: #5a67d8;
     color: white;
     padding: 12px 24px;
     border: none;
@@ -15,25 +20,18 @@
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
 }
 
 .logout-button:hover {
-    background: #c82333;
+    background: #4c51bf;
     transform: scale(1.05);
 }
 
 .logout-button:focus {
     outline: none;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Additional Styling */
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #121212;
-    color: #ffffff;
-    text-align: center;
-    padding: 20px;
+    box-shadow: 0 0 10px rgba(90, 103, 216, 0.4);
 }
 
 /* App layout grid */
@@ -42,7 +40,6 @@ body {
     grid-template-columns: 350px 1fr;
     gap: 20px;
     max-width: 1400px;
-   
     margin: 0 auto;
 }
 
@@ -53,21 +50,76 @@ body {
 }
 
 /* Adjust todos container to display in a grid of 3 */
-.todos-container {
+.app-todos-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
 }
 
 /* Make sure todo cards take up proper space */
-.todo-card {
+.app-todo-card {
     width: 100%;
     margin: 0;
 }
 
+/* Theme Toggle Button */
+.app-theme-toggle-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-right: 15px;
+}
+
+.app-theme-toggle-button:hover {
+    transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+body.dark-mode .app-search-input {
+    background-color: #242424;
+    color: #fff;
+    border-color: #333 !important;
+}
+
+body.dark-mode .app-search-input::placeholder {
+    color: #aaa;
+}
+
+body.dark-mode nav {
+    background-color: #1a1a2e !important;
+}
+
+/* Light Mode is the default */
+body.light-mode {
+    background-color: #f0f4f8;
+    color: #2d3748;
+}
+
+/* App-specific search input */
+.app-search-input {
+    width: 100%;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 12px;
+}
+
 /* Responsive adjustments */
 @media (max-width: 1200px) {
-    .todos-container {
+    .app-todos-container {
         grid-template-columns: repeat(2, 1fr);
     }
 }
@@ -77,13 +129,22 @@ body {
         grid-template-columns: 1fr;
     }
     
-    .todos-container {
+    .app-todos-container {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 600px) {
-    .todos-container {
+    .app-todos-container {
         grid-template-columns: 1fr;
+    }
+    
+    .nav-buttons {
+        display: flex;
+        align-items: center;
+    }
+    
+    .app-theme-toggle-button {
+        margin-right: 10px;
     }
 }
