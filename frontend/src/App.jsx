@@ -72,7 +72,7 @@ function App() {
     <div className={darkMode ? 'dark-mode' : 'light-mode'}>
       <nav className={`p-4 mb-4 ${darkMode ? 'bg-gray-900' : 'bg-gray-800'}`}>
         <div className="navbar-container">
-          <h1 className="text-white text-2xl font-bold">Tasks App</h1>
+          <h1 className="text-white text-2xl font-bold">Tasklist</h1>
           <div className="nav-buttons">
           
             <button

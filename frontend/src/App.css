@@ -8,6 +8,7 @@
 
 .nav-buttons {
     display: flex;
+    margin: 6px;
     align-items: center;
 }
 
@@ -43,7 +44,7 @@
 }
 
 .logout-button {
-    background: #5a67d8;
+    background: #df1212;
     color: white;
     padding: 12px 24px;
     border: none;
@@ -84,6 +85,7 @@
     display: flex;
     flex-direction: column;
 }
+
 
 /* Search and tabs container - NEW */
 .search-and-tabs-container {
@@ -142,9 +144,7 @@ body.dark-mode .app-search-input::placeholder {
     color: #aaa;
 }
 
-body.dark-mode nav {
-    background-color: #1a1a2e !important;
-}
+
 
 /* Tab button colors for dark mode */
 body.dark-mode .tab-button {

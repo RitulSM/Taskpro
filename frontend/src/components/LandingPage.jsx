@@ -50,12 +50,12 @@ function LandingPage({ onLogin, darkMode, toggleDarkMode }) {
       </div>
       <div className="content-wrapper">
         <div className="info-section">
-          <h1>Welcome to TaskMaster Pro</h1>
-          <p>Streamline your productivity with our powerful task management solution</p>
+          <h1>Welcome to Tasklist</h1>
+          <p >Streamline your productivity </p>
           <ul className="features-list">
             <li>Intuitive task organization</li>
             <li>Create Tasks</li>
-            <li>Mark them complete </li>
+            <li>Complete them</li>
             <li>Delete them</li>
           </ul>
         </div>

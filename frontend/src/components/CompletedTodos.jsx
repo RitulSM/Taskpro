@@ -46,11 +46,7 @@ function CompletedTodos({ todos = [], fetchTodos }) {
               </span>
             </div>
             <p>{todo.description}</p>
-            {todo.dueDate && (
-              <p className="due-date">
-                Completed on: {new Date(todo.completedDate || todo.updatedAt).toLocaleString()}
-              </p>
-            )}
+           
             <div className="button-container">
               <button
                 className="completed"
